@@ -128,7 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Asiakkaat.cs">
+    <Compile Include="Models\Asiakkaat.cs">
       <DependentUpon>TilausDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
@@ -136,38 +136,38 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Henkilot.cs">
+    <Compile Include="Models\Henkilot.cs">
       <DependentUpon>TilausDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Kayttajat.cs">
+    <Compile Include="Models\Kayttajat.cs">
       <DependentUpon>TilausDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Postitoimipaikat.cs">
+    <Compile Include="Models\Postitoimipaikat.cs">
       <DependentUpon>TilausDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tilaukset.cs">
+    <Compile Include="Models\Tilaukset.cs">
       <DependentUpon>TilausDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TilausDbModel.Context.cs">
+    <Compile Include="Models\TilausDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TilausDbModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="TilausDbModel.cs">
+    <Compile Include="Models\TilausDbModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TilausDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TilausDbModel.Designer.cs">
+    <Compile Include="Models\TilausDbModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TilausDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Tilausrivit.cs">
+    <Compile Include="Models\Tilausrivit.cs">
       <DependentUpon>TilausDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tuotteet.cs">
+    <Compile Include="Models\Tuotteet.cs">
       <DependentUpon>TilausDbModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -193,12 +193,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="TilausDbModel.Context.tt">
+    <Content Include="Models\TilausDbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TilausDbModel.Context.cs</LastGenOutput>
       <DependentUpon>TilausDbModel.edmx</DependentUpon>
     </Content>
-    <Content Include="TilausDbModel.tt">
+    <Content Include="Models\TilausDbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TilausDbModel.edmx</DependentUpon>
       <LastGenOutput>TilausDbModel.cs</LastGenOutput>
@@ -218,18 +218,17 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Map.cshtml" />
-    <EntityDeploy Include="TilausDbModel.edmx">
+    <EntityDeploy Include="Models\TilausDbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TilausDbModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="TilausDbModel.edmx.diagram">
+    <Content Include="Models\TilausDbModel.edmx.diagram">
       <DependentUpon>TilausDbModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

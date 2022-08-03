@@ -7,29 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TilausDbApp
+namespace TilausDbApp.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Tilaukset
+    public partial class Asiakkaat
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tilaukset()
+        public Asiakkaat()
         {
-            this.Tilausrivit = new HashSet<Tilausrivit>();
+            this.Tilaukset = new HashSet<Tilaukset>();
         }
     
-        public int TilausID { get; set; }
-        public Nullable<int> AsiakasID { get; set; }
-        public string Toimitusosoite { get; set; }
+        public int AsiakasID { get; set; }
+        public string Nimi { get; set; }
+        public string Osoite { get; set; }
         public string Postinumero { get; set; }
-        public Nullable<System.DateTime> Tilauspvm { get; set; }
-        public Nullable<System.DateTime> Toimituspvm { get; set; }
     
-        public virtual Asiakkaat Asiakkaat { get; set; }
         public virtual Postitoimipaikat Postitoimipaikat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tilausrivit> Tilausrivit { get; set; }
+        public virtual ICollection<Tilaukset> Tilaukset { get; set; }
     }
 }

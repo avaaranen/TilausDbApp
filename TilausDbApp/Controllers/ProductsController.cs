@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TilausDbApp.Models;
 
 namespace TilausDbApp.Controllers
 {
@@ -11,7 +12,11 @@ namespace TilausDbApp.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View();
+            TilausDBEntities db = new TilausDBEntities();
+            List<Tuotteet> model = db.Tuotteet.ToList();
+            db.Dispose();
+
+            return View(model);
         }
     }
 }

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TilausDbApp.Models.Tuotteet>
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts { 
+    <script type="text/javascript">
+        $(function () {
+            $(".naytaTuoteID").click(function () {
+                var TuoteID = $(this).data("tuoteid");
+                alert(TuoteID);
+            });
+            $(".naytaAhinta").click(function () {
+                var Ahinta = $(this).data("ahinta");
+                alert(Ahinta);
+            });
+        });
+    </script>
+}
+
+<h2>Tuotteet</h2>
+<h4>Tuotteita @Model.Count() kappaletta</h4>
+<table class=" table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>TuoteID</th>
+            <th>Nimi</th>
+            <th>Ahinta</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (TilausDbApp.Models.Tuotteet tuote in Model)
+        {
+            <tr>
+                <td>@tuote.TuoteID</td>
+                <td>@tuote.Nimi</td>
+                <td>@tuote.Ahinta</td>
+                <td><button class="btn btn-primary naytaTuoteID" data-TuoteID="@tuote.TuoteID">TuoteID</button></td>
+                <td><button class="btn btn-success" onclick='naytaValittuTuote("@tuote.Nimi")'>Nimi</button></td>
+                <td><button class="btn btn-warning naytaAhinta" data-Ahinta="@tuote.Ahinta">Ahinta</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    function naytaValittuTuote(nimi) {
+        alert(nimi);
+    }
+</script>
