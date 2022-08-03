@@ -26,5 +26,11 @@ namespace TilausDbApp.Controllers
 
             return View();
         }
+
+        public ActionResult Map()
+        {
+
+            return View();
+        }
     }
 }
