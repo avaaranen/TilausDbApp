@@ -4,9 +4,8 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Poista</h2>
 
-<h3>Oletko varma että haluat poistaa tämän asiakkaan?</h3>
+<h2>Oletko varma että haluat poistaa tämän asiakkaan?</h2>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -48,7 +47,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Poista" class="btn btn-default" /> |
+            <input type="submit" value="Poista" class="btn btn-primary button-link" /> |
             @Html.ActionLink("Takaisin taulukkoon", "Index")
         </div>
     }
