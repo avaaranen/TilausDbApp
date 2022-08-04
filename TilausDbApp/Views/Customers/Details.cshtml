@@ -1,0 +1,50 @@
+﻿@model TilausDbApp.Models.Asiakkaat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Tiedot</h2>
+
+<div>
+    <h3>@Html.DisplayFor(model => model.Nimi)</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Nimi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nimi)
+            </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Osoite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Osoite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Postitoimipaikat.Postinumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Postitoimipaikat.Postinumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Postitoimipaikat.Postitoimipaikka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Postitoimipaikat.Postitoimipaikka)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Takaisin taulukkoon", "Index")
+</p>
