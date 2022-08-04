@@ -18,5 +18,13 @@ namespace TilausDbApp.Controllers
 
             return View(model);
         }
+
+        public ActionResult ProductCard()
+        {
+            TilausDBEntities db = new TilausDBEntities();
+            List<Tuotteet> model = db.Tuotteet.ToList();
+            db.Dispose();
+            return View(model);
+        }
     }
 }

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TilausDbApp.Models.Tuotteet>
+@{
+    ViewBag.Title = "ProductCard";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $(".naytaTuoteID").click(function () {
+                var TuoteID = $(this).data("tuoteid");
+                alert(TuoteID);
+            });
+            $(".naytaAhinta").click(function () {
+                var Ahinta = $(this).data("ahinta");
+                alert(Ahinta);
+            });
+        });
+    </script>
+}
+<div class="container-fluid">
+    <h2>Tuotteet</h2>
+    <h4>Tuotteita @Model.Count() kappaletta</h4>
+    <p><button class="btn btn-primary">Lisää tuote</button></p>
+    
+    <div class="row">
+        @foreach (TilausDbApp.Models.Tuotteet tuote in Model)
+        {
+            <div class="col-lg-3">
+                <div class="card mb-3">
+                    <h3 class="card-header">@tuote.Nimi</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">@tuote.Ahinta &euro;</h5>
+                    </div>
+                    <img style="height: 200px; width: 100%; display: block;" src="@tuote.Kuvalinkki" alt="@tuote.Kuvalinkki" />
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Id: @tuote.TuoteID
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    function naytaValittuTuote(nimi) {
+        alert(nimi);
+    }
+</script>
