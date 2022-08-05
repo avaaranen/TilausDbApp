@@ -16,23 +16,47 @@ namespace TilausDbApp.Controllers
 
         public ActionResult Index()
         {
-            List<Tuotteet> model = db.Tuotteet.ToList();
-            return View(model);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                List<Tuotteet> model = db.Tuotteet.ToList();
+                return View(model);
+            }
         }
 
         public ActionResult ProductCard()
         {
-            List<Tuotteet> model = db.Tuotteet.ToList();
-            return View(model);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                List<Tuotteet> model = db.Tuotteet.ToList();
+                return View(model);
+            }
         }
 
         
         public ActionResult Edit(int? id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Tuotteet tuote = db.Tuotteet.Find(id);
-            if (tuote == null) return HttpNotFound();
-            return View(tuote);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Tuotteet tuote = db.Tuotteet.Find(id);
+                if (tuote == null) return HttpNotFound();
+                return View(tuote);
+            }
         }
 
         [HttpPost]
@@ -40,18 +64,34 @@ namespace TilausDbApp.Controllers
 
         public ActionResult Edit([Bind(Include = "Nimi, Ahinta, Kuvalinkki")] Tuotteet tuote)
         {
-            if (ModelState.IsValid)
+            if (Session["Username"] == null)
             {
-                db.Entry(tuote).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("ProductCard");
+                return RedirectToAction("login", "home");
             }
-            return View(tuote);
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (ModelState.IsValid)
+                {
+                    db.Entry(tuote).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("ProductCard");
+                }
+                return View(tuote);
+            }
         }
 
         public ActionResult Create()
         {
-            return View();
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                return View();
+            }
         }
 
         [HttpPost]
@@ -59,21 +99,37 @@ namespace TilausDbApp.Controllers
 
         public ActionResult Create([Bind(Include = "Nimi, Ahinta, Kuvalinkki")] Tuotteet tuote)
         {
-            if (ModelState.IsValid)
+            if (Session["Username"] == null)
             {
-                db.Tuotteet.Add(tuote);
-                db.SaveChanges();
-                return RedirectToAction("ProductCard");
+                return RedirectToAction("login", "home");
             }
-            return View(tuote);
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (ModelState.IsValid)
+                {
+                    db.Tuotteet.Add(tuote);
+                    db.SaveChanges();
+                    return RedirectToAction("ProductCard");
+                }
+                return View(tuote);
+            }
         }
 
         public ActionResult Delete(int? id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Tuotteet tuote = db.Tuotteet.Find(id);
-            if (tuote == null) return HttpNotFound();
-            return View(tuote);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Tuotteet tuote = db.Tuotteet.Find(id);
+                if (tuote == null) return HttpNotFound();
+                return View(tuote);
+            }
         }
 
         [HttpPost, ActionName("Delete")]
@@ -81,10 +137,25 @@ namespace TilausDbApp.Controllers
 
         public ActionResult DeleteConfirmed(int id)
         {
-            Tuotteet tuote = db.Tuotteet.Find(id);
-            db.Tuotteet.Remove(tuote);
-            db.SaveChanges();
-            return RedirectToAction("ProductCard");
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                Tuotteet tuote = db.Tuotteet.Find(id);
+                db.Tuotteet.Remove(tuote);
+                db.SaveChanges();
+                return RedirectToAction("ProductCard");
+            }
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            ViewBag.LoggedStatus = "Out";
+            return RedirectToAction("Index", "Home"); //Uloskirjautumisen jälkeen pääsivulle
         }
     }
 }

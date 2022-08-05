@@ -16,17 +16,33 @@ namespace TilausDbApp.Controllers
         TilausDBEntities db = new TilausDBEntities();
         public ActionResult Index()
         {
-            List<Asiakkaat> model = db.Asiakkaat.ToList();
-            return View(model);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                List<Asiakkaat> model = db.Asiakkaat.ToList();
+                return View(model);
+            }
         }
 
         public ActionResult Edit(int? id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Asiakkaat asiakas = db.Asiakkaat.Find(id);
-            if (asiakas == null) return HttpNotFound();
-            ViewBag.Postitoimipaikka = new SelectList(db.Postitoimipaikat, "Postitoimipaikka", "Postitoimipaikka");
-            return View(asiakas);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Asiakkaat asiakas = db.Asiakkaat.Find(id);
+                if (asiakas == null) return HttpNotFound();
+                ViewBag.Postitoimipaikka = new SelectList(db.Postitoimipaikat, "Postitoimipaikka", "Postitoimipaikka");
+                return View(asiakas);
+            }
         }
 
         [HttpPost]
@@ -34,18 +50,34 @@ namespace TilausDbApp.Controllers
 
         public ActionResult Edit([Bind(Include = "Nimi, Osoite, Postinumero, Postitoimipaikka")] Asiakkaat asiakas)
         {
-            if (ModelState.IsValid)
+            if (Session["Username"] == null)
             {
-                db.Entry(asiakas).State = EntityState.Modified;
-                db.SaveChanges();   
-                return RedirectToAction("Index");
+                return RedirectToAction("login", "home");
             }
-            return View(asiakas);
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (ModelState.IsValid)
+                {
+                    db.Entry(asiakas).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(asiakas);
+            }
         }
 
         public ActionResult Create()
         {
-            return View();
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                return View();
+            }
         }
 
         [HttpPost]
@@ -53,21 +85,37 @@ namespace TilausDbApp.Controllers
 
         public ActionResult Create([Bind(Include = "Nimi, Osoite, Postinumero")] Asiakkaat asiakas)
         {
-            if (ModelState.IsValid)
+            if (Session["Username"] == null)
             {
-                db.Asiakkaat.Add(asiakas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("login", "home");
             }
-            return View(asiakas);
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (ModelState.IsValid)
+                {
+                    db.Asiakkaat.Add(asiakas);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(asiakas);
+            }
         }
 
         public ActionResult Delete(int? id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Asiakkaat asiakas = db.Asiakkaat.Find(id);
-            if (asiakas == null) return HttpNotFound();
-            return View(asiakas);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Asiakkaat asiakas = db.Asiakkaat.Find(id);
+                if (asiakas == null) return HttpNotFound();
+                return View(asiakas);
+            }
         }
 
         [HttpPost, ActionName("Delete")]
@@ -75,18 +123,41 @@ namespace TilausDbApp.Controllers
         
         public ActionResult DeleteConfirmed(int id)
         {
-            Asiakkaat asiakas = db.Asiakkaat.Find(id);
-            db.Asiakkaat.Remove(asiakas);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                Asiakkaat asiakas = db.Asiakkaat.Find(id);
+                db.Asiakkaat.Remove(asiakas);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Details(int? id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Asiakkaat asiakas = db.Asiakkaat.Find(id);
-            if (asiakas == null) return HttpNotFound();
-            return View(asiakas);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                ViewBag.LoggedStatus = "In";
+                if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Asiakkaat asiakas = db.Asiakkaat.Find(id);
+                if (asiakas == null) return HttpNotFound();
+                return View(asiakas);
+            }
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            ViewBag.LoggedStatus = "Out";
+            return RedirectToAction("Index", "Home"); //Uloskirjautumisen jälkeen pääsivulle
         }
     }
 }
