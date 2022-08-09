@@ -62,7 +62,7 @@ namespace TilausDbApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit([Bind(Include = "Nimi, Ahinta, Kuvalinkki")] Tuotteet tuote)
+        public ActionResult Edit([Bind(Include = "TuoteID, Nimi, Ahinta, Kuvalinkki")] Tuotteet tuote)
         {
             if (Session["Username"] == null)
             {
